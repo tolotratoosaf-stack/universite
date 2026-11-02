@@ -1,0 +1,466 @@
+/* =========================================
+   BULLETINS DES ETUDIANTS
+========================================= */
+
+.bulletins-content {
+  width: 100%;
+  padding: 25px;
+  animation: bulletinAppear 0.7s ease;
+}
+
+@keyframes bulletinAppear {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   FILTRES ET RECHERCHE
+========================================= */
+
+.bulletins-content .filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  padding: 18px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(57, 36, 63, 0.04);
+}
+
+.bulletins-content .search-box {
+  position: relative;
+  flex: 1;
+  min-width: 230px;
+}
+
+.bulletins-content .search-box i {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.bulletins-content .search-box input {
+  width: 100%;
+  height: 45px;
+  padding: 0 15px 0 43px;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.bulletins-content .search-box input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(114, 47, 69, 0.09);
+}
+
+.bulletins-content .tri {
+  min-width: 210px;
+}
+
+.bulletins-content .tri select {
+  width: 100%;
+  height: 45px;
+  padding: 0 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.bulletins-content .tri select:focus {
+  border-color: var(--primary-color);
+}
+
+/* =========================================
+   LISTE DES BULLETINS
+========================================= */
+
+.bulletins-content .all-bulletin {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* =========================================
+   CARTE DU BULLETIN
+========================================= */
+
+.bulletins-content .bulletin-card {
+  overflow: hidden;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(57, 36, 63, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  animation: cardAppear 0.6s ease both;
+}
+
+.bulletins-content .bulletin-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(57, 36, 63, 0.1);
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   EN-TETE DU BULLETIN
+========================================= */
+
+.bulletins-content .bulletin-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 25px 28px;
+  background: linear-gradient(
+    120deg,
+    rgba(114, 47, 69, 0.07),
+    rgba(183, 110, 121, 0.07)
+  );
+  border-bottom: 1px solid var(--border-color);
+}
+
+.bulletins-content .bulletin-header .left,
+.bulletins-content .bulletin-header .right {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.bulletins-content .bulletin-header .left {
+  flex: 1;
+}
+
+.bulletins-content .bulletin-header .right {
+  min-width: 230px;
+  padding-left: 25px;
+  border-left: 1px solid var(--border-color);
+}
+
+.bulletins-content .bulletin-header h3 {
+  margin: 0 0 5px;
+  color: var(--secondary-color);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.bulletins-content .bulletin-header h3 span {
+  color: var(--primary-color);
+}
+
+.bulletins-content .bulletin-header p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.bulletins-content .bulletin-header p span {
+  margin-left: 4px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.bulletins-content .bulletin-header .right h3 {
+  font-size: 18px;
+  color: var(--primary-color);
+}
+
+/* =========================================
+   BADGES DE DECISION
+========================================= */
+
+.bulletins-content .decision {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.bulletins-content .decision.admitted {
+  color: #27845a;
+  background: rgba(39, 132, 90, 0.12);
+}
+
+.bulletins-content .decision.not-admitted {
+  color: #d64550;
+  background: rgba(214, 69, 80, 0.12);
+}
+
+/* =========================================
+   TABLEAU DES NOTES
+========================================= */
+
+.bulletins-content .bulletin-body {
+  width: 100%;
+  padding: 22px 28px;
+  overflow-x: auto;
+}
+
+.bulletins-content .bulletin-table {
+  width: 100%;
+  min-width: 580px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.bulletins-content .bulletin-table thead {
+  background: var(--secondary-color);
+  color: #fff;
+}
+
+.bulletins-content .bulletin-table th {
+  padding: 15px 17px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  color: var(--gold-color);
+}
+
+.bulletins-content .bulletin-table th:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.bulletins-content .bulletin-table th:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.bulletins-content .bulletin-table td {
+  padding: 15px 17px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.bulletins-content .bulletin-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.bulletins-content .bulletin-table tbody tr:hover {
+  background: rgba(183, 110, 121, 0.07);
+}
+
+.bulletins-content .bulletin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.bulletins-content .bulletin-table td:first-child {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.bulletins-content .bulletin-table td:nth-child(3) {
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+/* =========================================
+   PIED DU BULLETIN
+========================================= */
+
+.bulletins-content .bulletin-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 17px 28px;
+  background: #fcfafb;
+  border-top: 1px solid var(--border-color);
+}
+
+.bulletins-content .bulletin-footer p {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.bulletins-content .bulletin-footer p i {
+  color: var(--accent-color);
+}
+
+/* =========================================
+   BOUTON IMPRIMER
+========================================= */
+
+.bulletins-content .btn-print {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 17px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.bulletins-content .btn-print:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(57, 36, 63, 0.18);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media screen and (max-width: 768px) {
+  .bulletins-content {
+    padding: 15px;
+  }
+
+  .bulletins-content .bulletin-header {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .bulletins-content .bulletin-header .right {
+    width: 100%;
+    min-width: 0;
+    padding: 18px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .bulletins-content .bulletin-body {
+    padding: 18px;
+  }
+
+  .bulletins-content .bulletin-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 17px 20px;
+  }
+
+  .bulletins-content .filter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .bulletins-content .tri {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .bulletins-content {
+    padding: 10px;
+  }
+
+  .bulletins-content .bulletin-header {
+    padding: 17px;
+  }
+
+  .bulletins-content .bulletin-header h3 {
+    font-size: 17px;
+  }
+
+  .bulletins-content .bulletin-header p {
+    font-size: 12px;
+  }
+
+  .bulletins-content .bulletin-body {
+    padding: 12px;
+  }
+
+  .bulletins-content .bulletin-footer {
+    padding: 15px;
+  }
+
+  .bulletins-content .btn-print {
+    width: 100%;
+  }
+}
+
+/* =========================================
+   IMPRESSION
+========================================= */
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+
+  .bulletins-content {
+    padding: 0;
+  }
+
+  .bulletins-content .filter,
+  .bulletins-content .btn-print {
+    display: none !important;
+  }
+
+  .bulletins-content .all-bulletin {
+    gap: 20px;
+  }
+
+  .bulletins-content .bulletin-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .bulletins-content .bulletin-card:hover {
+    transform: none;
+  }
+
+  .bulletins-content .bulletin-header {
+    background: #f5f5f5 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .bulletins-content .bulletin-table thead {
+    background: #39243f !important;
+    color: #fff !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .bulletins-content .bulletin-body {
+    overflow: visible;
+  }
+}

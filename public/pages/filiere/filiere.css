@@ -1,0 +1,387 @@
+@import url("../../global.css");
+
+/* ================================
+   EN-TÊTE DE PAGE
+================================ */
+
+.page-heading {
+  margin-bottom: 30px;
+}
+
+.heading-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.heading-subtitle {
+  color: var(--accent-color);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.heading-title h1 {
+  margin: 7px 0;
+  color: var(--secondary-color);
+  font-size: 28px;
+}
+
+.heading-title p {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* =========================================
+   CONTENU DES FILIÈRES
+========================================= */
+
+#hero .page-content {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+
+  align-items: start;
+  gap: 30px;
+
+  padding-block: 20px;
+}
+
+.heading-title h1 {
+  margin: 7px 0;
+  color: var(--secondary-color);
+  font-size: 28px;
+}
+
+.heading-title p {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.heading-subtitle {
+  color: var(--accent-color);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* =========================================
+   CARTE DE FILIÈRE
+========================================= */
+
+.filiere-card {
+  position: relative;
+
+  width: 100%;
+  overflow: hidden;
+
+  background: var(--surface-color);
+
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
+
+  border-radius: 14px;
+
+  box-shadow: 0 5px 20px rgba(57, 36, 63, 0.06);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
+  animation: cardAppear 0.7s ease both;
+}
+
+.filiere-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow: 0 15px 35px rgba(57, 36, 63, 0.13);
+}
+
+/* =========================================
+   ANIMATION D'APPARITION
+========================================= */
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   EN-TÊTE DE LA CARTE
+========================================= */
+
+.article-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 22px;
+
+  background: linear-gradient(135deg, #f8f4f1, #ffffff);
+
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Partie gauche */
+
+.filiere-title {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.filiere-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  background: var(--secondary-color);
+  border-radius: 12px;
+}
+
+.filiere-icon i {
+  color: var(--gold-color);
+  font-size: 21px;
+}
+
+.filiere-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.filiere-title h2 {
+  color: var(--primary-color);
+
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Date */
+
+.filiere-date {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 8px 11px;
+
+  background: #f0e8eb;
+  border-radius: 20px;
+
+  white-space: nowrap;
+}
+
+.filiere-date i {
+  color: var(--primary-color);
+  font-size: 12px;
+}
+
+.filiere-date span {
+  color: var(--primary-color);
+
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* =========================================
+   CORPS DE LA CARTE
+========================================= */
+
+.article-body {
+  padding: 22px;
+}
+
+/* Titre des matières */
+
+.matiere-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+.matiere-heading h3 {
+  color: var(--secondary-color);
+  font-size: 1.05rem;
+}
+
+.matiere-count {
+  padding: 6px 10px;
+
+  background: #f8f4f1;
+  color: var(--primary-color);
+
+  border-radius: 20px;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* =========================================
+   LISTE DES MATIÈRES
+========================================= */
+
+.list-matiere ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.list-matiere ul li {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  min-height: 43px;
+
+  padding: 11px 10px 11px 25px;
+
+  background: #faf8f7;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.82rem;
+  line-height: 1.4;
+
+  transition: all 0.3s ease;
+}
+
+/* Petite décoration */
+
+.list-matiere ul li::before {
+  content: "";
+
+  position: absolute;
+
+  left: 10px;
+  top: 17px;
+
+  width: 6px;
+  height: 6px;
+
+  background: var(--accent-color);
+  border-radius: 50%;
+}
+
+.list-matiere ul li:hover {
+  background: #f0e8eb;
+
+  border-color: var(--accent-color);
+
+  color: var(--primary-color);
+
+  transform: translateX(4px);
+}
+
+/* =========================================
+   PIED DE LA CARTE
+========================================= */
+
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 15px 22px;
+
+  border-top: 1px solid var(--border-color);
+
+  background: #fcfaf9;
+}
+
+.article-footer span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+}
+
+.article-footer span i {
+  color: var(--gold-color);
+}
+
+.article-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--primary-color);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  transition: gap 0.3s ease;
+}
+
+.article-footer a i {
+  color: var(--primary-color);
+}
+
+.article-footer a:hover {
+  gap: 13px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+  #hero .page-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .article-heading {
+    flex-wrap: wrap;
+    padding: 17px;
+  }
+
+  .article-body {
+    padding: 17px;
+  }
+
+  .list-matiere ul {
+    grid-template-columns: 1fr;
+  }
+
+  .article-footer {
+    padding: 14px 17px;
+  }
+}

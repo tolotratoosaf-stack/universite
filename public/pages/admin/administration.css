@@ -1,0 +1,469 @@
+@import url("../../global.css");
+
+/* 
+================================================
+        HEADER DU PAGE
+================================================
+*/
+.page-heading {
+  position: sticky;
+  top: -50px;
+  margin-bottom: 25px;
+  z-index: 888;
+}
+
+.heading-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.heading-subtitle {
+  color: var(--accent-color);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.heading-title h1 {
+  color: var(--secondary-color);
+  font-size: 27px;
+  margin: 7px 0;
+}
+
+.heading-title p {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.heading-counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border-radius: 10px;
+  background: rgba(114, 47, 69, 0.08);
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.heading-counter i {
+  font-size: 19px;
+}
+
+.page-heading hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 22px;
+}
+
+/* =========================================
+   CONTENEUR PRINCIPAL
+========================================= */
+
+.administration-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 25px 30px;
+  background: var(--background-color);
+  animation: adminAppear 0.7s ease both;
+}
+
+@keyframes adminAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   EN-TETE DE LA PAGE
+========================================= */
+
+.administration-page .page-heading {
+  position: relative;
+  padding: 25px 30px 20px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(57, 36, 63, 0.04);
+}
+
+.administration-page .heading-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.administration-page .heading-title {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.administration-page .heading-subtitle {
+  width: fit-content;
+  padding: 6px 12px;
+  color: var(--primary-color);
+  background: rgba(114, 47, 69, 0.08);
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.administration-page .heading-title h1 {
+  margin: 0;
+  color: var(--secondary-color);
+  font-size: 30px;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+}
+
+.administration-page .heading-title p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.administration-page .heading-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  flex-shrink: 0;
+  color: var(--primary-color);
+  background: linear-gradient(
+    135deg,
+    rgba(114, 47, 69, 0.12),
+    rgba(183, 110, 121, 0.18)
+  );
+  border-radius: 20px;
+  font-size: 30px;
+  transition: 0.4s ease;
+}
+
+.administration-page .heading-icon:hover {
+  transform: rotate(-8deg) scale(1.07);
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* =========================================
+   FIL D'ARIANE
+========================================= */
+
+.administration-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+  padding-top: 17px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.administration-page .breadcrumb i {
+  color: var(--accent-color);
+  font-size: 9px;
+}
+
+.administration-page .breadcrumb strong {
+  color: var(--primary-color);
+  font-weight: 650;
+}
+
+/* =========================================
+   CONTENU DE L'ADMINISTRATION
+========================================= */
+
+.administration-page .page-content {
+  width: 100%;
+}
+
+/* =========================================
+   SECTION DE CHOIX
+========================================= */
+
+.administration-page .addition-section {
+  padding: 25px;
+  margin-bottom: 25px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(57, 36, 63, 0.04);
+  animation: sectionAppear 0.7s ease both;
+  animation-delay: 0.15s;
+}
+
+@keyframes sectionAppear {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   TITRE DE LA SECTION
+========================================= */
+
+.administration-page .section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.administration-page .section-subtitle {
+  color: var(--accent-color);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.administration-page .section-heading h2 {
+  margin: 7px 0;
+  color: var(--secondary-color);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.administration-page .section-heading p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.administration-page .step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  color: var(--primary-color);
+  background: rgba(114, 47, 69, 0.08);
+  border: 1px solid rgba(114, 47, 69, 0.12);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+/* =========================================
+   OPTIONS D'AJOUT
+========================================= */
+
+.administration-page .addition-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.administration-page .addition-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.administration-page .addition-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.administration-page .option-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 95px;
+  padding: 17px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 13px;
+  transition: all 0.3s ease;
+}
+
+/* Icône */
+
+.administration-page .option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  color: var(--primary-color);
+  background: rgba(114, 47, 69, 0.08);
+  border-radius: 12px;
+  font-size: 19px;
+  transition: all 0.3s ease;
+}
+
+/* Texte */
+
+.administration-page .option-content h3 {
+  margin: 0 0 6px;
+  color: var(--secondary-color);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.administration-page .option-content p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* Icône de sélection */
+
+.administration-page .option-check {
+  margin-left: auto;
+  color: var(--border-color);
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+/* Effet au survol */
+
+.administration-page .addition-option:hover .option-content {
+  border-color: var(--accent-color);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 18px rgba(57, 36, 63, 0.07);
+}
+
+.administration-page .addition-option:hover .option-icon {
+  color: #fff;
+  background: var(--accent-color);
+}
+
+/* Option sélectionnée */
+
+.administration-page .addition-option input:checked + .option-content {
+  background: linear-gradient(
+    120deg,
+    rgba(114, 47, 69, 0.07),
+    rgba(183, 110, 121, 0.07)
+  );
+  border: 1.5px solid var(--primary-color);
+  box-shadow: 0 4px 15px rgba(114, 47, 69, 0.08);
+}
+
+.administration-page
+  .addition-option
+  input:checked
+  + .option-content
+  .option-icon {
+  color: #fff;
+  background: var(--primary-color);
+}
+
+.administration-page
+  .addition-option
+  input:checked
+  + .option-content
+  .option-check {
+  color: var(--primary-color);
+}
+
+.administration-page .addition-option input:focus-visible + .option-content {
+  outline: 3px solid rgba(114, 47, 69, 0.2);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   RESPONSIVE TABLETTE
+========================================= */
+
+@media screen and (max-width: 900px) {
+  .administration-page {
+    padding: 20px;
+  }
+
+  .administration-page .addition-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media screen and (max-width: 600px) {
+  .administration-page {
+    padding: 12px;
+  }
+
+  .administration-page .page-heading {
+    padding: 20px;
+  }
+
+  .administration-page .heading-title h1 {
+    font-size: 24px;
+  }
+
+  .administration-page .heading-title p {
+    font-size: 12px;
+  }
+
+  .administration-page .heading-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    font-size: 22px;
+  }
+
+  .administration-page .addition-section {
+    padding: 18px;
+  }
+
+  .administration-page .section-heading h2 {
+    font-size: 18px;
+  }
+
+  .administration-page .addition-options {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .administration-page .option-content {
+    min-height: 80px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .administration-page .heading-icon {
+    display: none;
+  }
+
+  .administration-page .breadcrumb {
+    font-size: 11px;
+  }
+
+  .administration-page .section-heading p {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,383 @@
+/* ==========================================
+   EN-TÊTE DE LA CLASSE
+========================================== */
+
+.administration-page .classe-heading {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 28px;
+}
+
+.administration-page .classe-heading-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 55px;
+  height: 55px;
+  border-radius: 15px;
+  color: var(--primary-color);
+  background: rgba(114, 47, 69, 0.09);
+  font-size: 22px;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.administration-page .classe-heading-icon:hover {
+  transform: rotate(-8deg) scale(1.05);
+  background: rgba(114, 47, 69, 0.15);
+}
+
+.administration-page .classe-subtitle {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent-color);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1.5px;
+}
+
+.administration-page .classe-heading h2 {
+  margin: 0 0 7px;
+  padding: 0;
+  color: var(--secondary-color);
+  font-size: 21px;
+  font-weight: 750;
+}
+
+.administration-page .classe-heading h2::after {
+  display: none;
+}
+
+.administration-page .classe-heading p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   FORMULAIRE ET GRILLE
+========================================== */
+
+.administration-page .classe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.administration-page .classe-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 23px;
+}
+
+.administration-page .classe-form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+/* ==========================================
+   CHAMPS AVEC ICÔNES
+========================================== */
+
+.administration-page .classe-form .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.administration-page .classe-form .input-wrapper > i {
+  position: absolute;
+  left: 15px;
+  z-index: 1;
+  color: var(--accent-color);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.administration-page .classe-form .input-wrapper input,
+.administration-page .classe-form .input-wrapper select {
+  width: 100%;
+  height: 48px;
+  padding: 0 15px 0 43px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.administration-page .classe-form .input-wrapper input:focus,
+.administration-page .classe-form .input-wrapper select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(114, 47, 69, 0.09);
+}
+
+.administration-page .classe-form .input-wrapper:focus-within > i {
+  color: var(--primary-color);
+}
+
+/* ==========================================
+   DESCRIPTION
+========================================== */
+
+.administration-page .classe-form .textarea-wrapper {
+  width: 100%;
+}
+
+.administration-page .classe-form .textarea-wrapper textarea {
+  display: block;
+  width: 100%;
+  min-height: 125px;
+  padding: 14px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+  resize: vertical;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.administration-page .classe-form .textarea-wrapper textarea::placeholder {
+  color: #aaa1a7;
+  font-size: 12px;
+}
+
+.administration-page .classe-form .textarea-wrapper textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(114, 47, 69, 0.09);
+}
+
+/* ==========================================
+   AIDE SOUS LES CHAMPS
+========================================== */
+
+.administration-page .classe-form .field-hint {
+  margin-top: -3px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media screen and (max-width: 550px) {
+  .administration-page .classe-heading {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .administration-page .classe-heading-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .administration-page .classe-heading h2 {
+    font-size: 18px;
+  }
+
+  .administration-page .classe-form-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .administration-page .classe-form-grid .full-width {
+    grid-column: auto;
+  }
+}
+
+/* ==========================================
+   SECTION AJOUTER UNE CLASSE
+========================================== */
+
+.administration-page .add_classe {
+  margin-top: 30px;
+  padding: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--surface-color);
+  box-shadow: 0 6px 22px rgba(57, 36, 63, 0.05);
+  animation: classeAppear 0.7s ease both;
+}
+
+@keyframes classeAppear {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TITRE */
+
+.administration-page .add_classe h2 {
+  position: relative;
+  margin: 0 0 28px;
+  padding-bottom: 16px;
+  color: var(--secondary-color);
+  font-size: 21px;
+  font-weight: 750;
+}
+
+.administration-page .add_classe h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 55px;
+  height: 3px;
+  border-radius: 5px;
+  background: var(--gold-color);
+}
+
+/* FIELDSET */
+
+.administration-page .add_classe fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  padding: 25px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: #fdfbfc;
+}
+
+.administration-page .add_classe legend {
+  padding: 0 12px;
+  color: var(--primary-color);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* LABELS */
+
+.administration-page .add_classe label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.administration-page .add_classe label > span {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.administration-page .add_classe .obligatoire {
+  color: var(--danger-color);
+}
+
+/* INPUTS ET SELECT */
+
+.administration-page .add_classe input,
+.administration-page .add_classe select,
+.administration-page .add_classe textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.administration-page .add_classe input,
+.administration-page .add_classe select {
+  height: 48px;
+}
+
+.administration-page .add_classe textarea {
+  min-height: 125px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.administration-page .add_classe input::placeholder,
+.administration-page .add_classe textarea::placeholder {
+  color: #aaa1a7;
+  font-size: 12px;
+}
+
+/* FOCUS */
+
+.administration-page .add_classe input:focus,
+.administration-page .add_classe select:focus,
+.administration-page .add_classe textarea:focus {
+  border-color: var(--primary-color);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(114, 47, 69, 0.09);
+}
+
+/* HOVER */
+
+.administration-page .add_classe input:hover,
+.administration-page .add_classe select:hover,
+.administration-page .add_classe textarea:hover {
+  border-color: var(--accent-color);
+}
+
+/* TEXTAREA SUR TOUTE LA LARGEUR */
+
+.administration-page .add_classe label:has(textarea) {
+  grid-column: 1 / -1;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 768px) {
+  .administration-page .add_classe {
+    padding: 22px;
+  }
+
+  .administration-page .add_classe fieldset {
+    padding: 20px;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .administration-page .add_classe {
+    padding: 18px 14px;
+  }
+
+  .administration-page .add_classe fieldset {
+    grid-template-columns: 1fr;
+    padding: 18px 13px;
+  }
+
+  .administration-page .add_classe label:has(textarea) {
+    grid-column: auto;
+  }
+
+  .administration-page .add_classe h2 {
+    font-size: 18px;
+  }
+}

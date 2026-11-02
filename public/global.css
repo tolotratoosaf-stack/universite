@@ -1,0 +1,314 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-track {
+  width: 100%;
+  background-color: var(--secondary-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 5px;
+}
+
+:root {
+  /* Identité visuelle */
+  --primary-color: #722f45;
+  --secondary-color: #39243f;
+  --accent-color: #b76e79;
+  --gold-color: #c9a66b;
+
+  /* Arrière-plans */
+  --background-color: #f8f4f1;
+  --surface-color: #ffffff;
+
+  /* Textes */
+  --text-primary: #302a30;
+  --text-secondary: #817780;
+
+  /* Bordures */
+  --border-color: #e8dfe3;
+
+  /* États */
+  --success-color: #27845a;
+  --warning-color: #e5a33d;
+  --danger-color: #d64550;
+  --info-color: #4785b5;
+}
+
+/* ===== CONFIGURATION GÉNÉRALE ===== */
+
+body {
+  width: 100%;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-inline: clamp(15px, 5vw, 160px);
+  padding-top: 150px;
+
+  background-color: var(--background-color);
+  background-image:
+    linear-gradient(rgba(248, 244, 241, 0.342), rgba(248, 244, 241, 0.925)),
+    url("../images/Campus moderne avec sculpture abstraite.png");
+
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-primary);
+}
+
+/* ===== HEADER ===== */
+
+body > header {
+  position: fixed;
+  width: 100%;
+  min-height: 110px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  top: 0;
+  left: 0;
+
+  padding: 10px 50px;
+
+  background: var(--secondary-color);
+
+  box-shadow: 0 4px 20px rgba(57, 36, 63, 0.18);
+
+  z-index: 1000;
+}
+
+/* ===== PARTIE GAUCHE ===== */
+
+header .left {
+  width: 500px;
+  height: 100px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding-left: 15px;
+
+  background: linear-gradient(to right, var(--secondary-color), #503857);
+
+  color: var(--background-color);
+
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+}
+
+.left h2 {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.left h2 span {
+  display: block;
+  color: var(--gold-color);
+}
+
+/* ===== NAVIGATION ===== */
+
+header nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+header nav ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+}
+
+header nav ul li a {
+  position: relative;
+
+  color: var(--background-color);
+  font-size: 1.05em;
+  font-weight: 500;
+
+  transition: color 0.3s ease;
+}
+
+/* Effet de survol */
+
+header nav ul li a::after {
+  content: "";
+
+  position: absolute;
+  width: 0;
+  height: 2px;
+
+  left: 0;
+  bottom: -7px;
+
+  background: var(--gold-color);
+
+  transition: width 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: var(--gold-color);
+}
+
+header nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+  header {
+    padding: 10px 20px;
+  }
+
+  header .left {
+    width: 250px;
+  }
+
+  header nav ul {
+    gap: 15px;
+  }
+
+  header nav ul li a {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  header .left {
+    width: 100%;
+    height: auto;
+    clip-path: none;
+    align-items: center;
+    padding: 10px;
+  }
+
+  header nav {
+    gap: 10px;
+  }
+
+  header nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  body {
+    padding-top: 160px;
+  }
+}
+
+/* =========================================
+   CONFIGURATION GÉNÉRALE
+========================================= */
+
+main {
+  width: 100%;
+}
+
+main * {
+  color: var(--text-primary);
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+#hero {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+}
+
+/* ======= FOOTER ======= */
+body > footer {
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  background-color: var(--secondary-color);
+}
+body footer p {
+  text-align: center;
+  color: var(--gold-color);
+}
+
+/* TESTE */
+.table-container {
+  width: 100%;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* CAPTION FIXE */
+.table-caption {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 20;
+
+  width: 100%;
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  background: var(--surface-color);
+  color: var(--secondary-color);
+
+  font-size: 16px;
+  font-weight: 700;
+
+  border-bottom: 1px solid var(--border-color);
+}
+
+.caption-info {
+  color: var(--accent-color);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* TABLEAU */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.notes-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}

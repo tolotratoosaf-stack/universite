@@ -1,0 +1,452 @@
+/* ==========================================
+   FORMULAIRE D'INSCRIPTION
+========================================== */
+
+.administration-page .student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 30px;
+  animation: formAppear 0.7s ease both;
+}
+
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   SECTIONS DU FORMULAIRE
+========================================== */
+
+.administration-page .info-section {
+  min-width: 0;
+  padding: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background: var(--surface-color);
+  box-shadow: 0 5px 20px rgba(57, 36, 63, 0.04);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.administration-page .info-section:hover {
+  border-color: rgba(114, 47, 69, 0.25);
+  box-shadow: 0 10px 28px rgba(57, 36, 63, 0.07);
+}
+
+.administration-page .info-section legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  color: var(--secondary-color);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.administration-page .legend-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  color: var(--primary-color);
+  background: rgba(114, 47, 69, 0.09);
+  font-size: 16px;
+}
+
+.administration-page .fieldset-description {
+  margin: 5px 0 25px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* ==========================================
+   GRILLE DES CHAMPS
+========================================== */
+
+.administration-page .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.administration-page .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.administration-page .form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.administration-page .form-group label {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.administration-page .obligatoire {
+  color: var(--danger-color);
+  margin-left: 3px;
+}
+
+/* ==========================================
+   CHAMPS AVEC ICÔNES
+========================================== */
+
+.administration-page .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.administration-page .input-wrapper > i {
+  position: absolute;
+  left: 15px;
+  z-index: 1;
+  color: var(--accent-color);
+  font-size: 15px;
+  pointer-events: none;
+  transition: color 0.25s ease;
+}
+
+.administration-page .input-wrapper input,
+.administration-page .input-wrapper select {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0 15px 0 43px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.administration-page .input-wrapper input::placeholder {
+  color: #aaa1a7;
+  font-size: 12px;
+}
+
+.administration-page .input-wrapper select {
+  cursor: pointer;
+}
+
+.administration-page .input-wrapper input:focus,
+.administration-page .input-wrapper select:focus {
+  border-color: var(--primary-color);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(114, 47, 69, 0.09);
+}
+
+.administration-page .input-wrapper:focus-within > i {
+  color: var(--primary-color);
+}
+
+/* ==========================================
+   INFORMATIONS DES PARENTS
+========================================== */
+
+.administration-page .parent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.administration-page .parent-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  background: #fdfbfc;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.administration-page .parent-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(114, 47, 69, 0.3);
+  box-shadow: 0 8px 22px rgba(57, 36, 63, 0.07);
+}
+
+.administration-page .parent-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.administration-page .parent-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: rgba(114, 47, 69, 0.09);
+  color: var(--primary-color);
+  font-size: 18px;
+}
+
+.administration-page .parent-heading h3 {
+  margin: 0 0 5px;
+  color: var(--secondary-color);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.administration-page .parent-heading p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+/* Champs dans les cartes des parents */
+
+.administration-page .parent-card .form-group {
+  gap: 7px;
+}
+
+.administration-page .parent-card .form-group label {
+  font-size: 12px;
+}
+
+.administration-page .parent-card .form-group input,
+.administration-page .parent-card .form-group select {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 12px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.administration-page .parent-card .form-group input::placeholder {
+  color: #aaa1a7;
+}
+
+.administration-page .parent-card .form-group input:focus,
+.administration-page .parent-card .form-group select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(114, 47, 69, 0.08);
+}
+
+/* Carte du tuteur */
+
+.administration-page .tutor-card {
+  background: linear-gradient(145deg, #fff, rgba(201, 166, 107, 0.07));
+}
+
+.administration-page .tutor-card .parent-icon {
+  background: rgba(201, 166, 107, 0.17);
+  color: #9b763d;
+}
+
+/* ==========================================
+   BOUTONS ET ACTIONS DU FORMULAIRE
+========================================== */
+
+.administration-page .form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 22px 25px;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  background: var(--surface-color);
+}
+
+.administration-page .form-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.administration-page .form-note i {
+  color: var(--info-color);
+  font-size: 15px;
+}
+
+.administration-page .button-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.administration-page .button-group button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 45px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Bouton réinitialiser */
+
+.administration-page .btn-reset {
+  border: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-secondary);
+}
+
+.administration-page .btn-reset:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+  background: #faf5f6;
+  color: var(--primary-color);
+}
+
+/* Bouton inscrire */
+
+.administration-page .btn-submit {
+  border: 1px solid var(--primary-color);
+  background: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(114, 47, 69, 0.18);
+}
+
+.administration-page .btn-submit:hover {
+  transform: translateY(-3px);
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  box-shadow: 0 7px 17px rgba(57, 36, 63, 0.2);
+}
+
+.administration-page .button-group button:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media screen and (max-width: 1100px) {
+  .administration-page .parent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .administration-page .tutor-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .administration-page .info-section {
+    padding: 22px;
+  }
+
+  .administration-page .parent-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .administration-page .tutor-card {
+    grid-column: auto;
+  }
+
+  .administration-page .form-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .administration-page .button-group {
+    width: 100%;
+  }
+
+  .administration-page .button-group button {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .administration-page .form-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .administration-page .form-group.full-width {
+    grid-column: auto;
+  }
+
+  .administration-page .info-section {
+    padding: 18px 14px;
+  }
+
+  .administration-page .info-section legend {
+    font-size: 14px;
+  }
+
+  .administration-page .fieldset-description {
+    font-size: 12px;
+  }
+
+  .administration-page .parent-card {
+    padding: 17px;
+  }
+
+  .administration-page .form-actions {
+    padding: 18px 14px;
+  }
+
+  .administration-page .button-group {
+    flex-direction: column;
+  }
+
+  .administration-page .button-group button {
+    width: 100%;
+  }
+
+  .administration-page .form-note {
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+}
