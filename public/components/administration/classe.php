@@ -1,3 +1,7 @@
+<?php
+  require_once __DIR__ . "/../../../server/services/getData/classe.php";
+?>
+
 <!-- =================================
             FORMULAIRE : AJOUTER UNE CLASSE
         ================================== -->
@@ -21,7 +25,7 @@
 
   <!-- FORMULAIRE -->
 
-  <form action="#" method="POST" class="classe-form">
+  <form action="../../../server/services/sendData/classe.php" method="POST" class="classe-form">
     <fieldset>
       <legend>
         <i class="fa-solid fa-chalkboard-user"></i>
@@ -30,20 +34,36 @@
 
       <div class="classe-form-grid">
         <!-- NOM DE LA CLASSE -->
-
         <div class="form-group">
           <label for="classe_name">
             Nom de la classe
             <span class="obligatoire">*</span>
           </label>
-
           <div class="input-wrapper">
             <i class="fa-solid fa-users"></i>
-
             <input
               type="text"
               name="classe_name"
               id="classe_name"
+              placeholder="Ex : License 1, Master 1..."
+              maxlength="100"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- CODE CLASSE -->
+         <div class="form-group">
+          <label for="code_classe">
+            Code de la classe
+            <span class="obligatoire">*</span>
+          </label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-users"></i>
+            <input
+              type="text"
+              name="code_classe"
+              id="code_classe"
               placeholder="Ex : L1, L2, L3, M1..."
               maxlength="100"
               required
@@ -52,16 +72,13 @@
         </div>
 
         <!-- CAPACITÉ MAXIMALE -->
-
         <div class="form-group">
           <label for="capacite">
             Capacité maximale
             <span class="obligatoire">*</span>
           </label>
-
           <div class="input-wrapper">
             <i class="fa-solid fa-user-group"></i>
-
             <input
               type="number"
               name="capacite"
@@ -81,20 +98,15 @@
             Filière de rattachement
             <span class="obligatoire">*</span>
           </label>
-
           <div class="input-wrapper">
             <i class="fa-solid fa-book-open"></i>
-
             <select name="filiere" id="filiere_classe" required>
               <option value="" selected disabled>
                 Sélectionner une filière
               </option>
-
-              <option value="gestion">Gestion</option>
-
-              <option value="informatique">Informatique</option>
-
-              <option value="droit">Droit</option>
+              <?php foreach($all_filiere as $filiere):?>
+                <option value="<?= $filiere['code_filiere']?>"><?= $filiere['nom_filiere']?></option>
+              <?php endforeach?>
             </select>
           </div>
         </div>

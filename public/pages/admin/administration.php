@@ -1,78 +1,26 @@
+<?php
+  $choice = (string) in_array(($_GET['choice'] ?? '') , ['filiere','classe','matiere','etudiant']) ? $_GET['choice'] : 'etudiant';
+?>
+
 <!doctype html>
 <html lang="fr">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <?php require_once __DIR__ . "/../../components/head.php"?>    
     <title>Administration | Espace académique</title>
-
-    <!-- Font Awesome 6.7.2 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
-
     <!-- CSS -->
     <link rel="stylesheet" href="administration.css" />
     <link rel="stylesheet" href="style/inscription.css" />
     <link rel="stylesheet" href="style/classe.css" />
     <link rel="stylesheet" href="style/filiere.css" />
+    <link rel="stylesheet" href="style/matiere.css" />
+    <script src="administration.js" defer></script>
   </head>
 
   <body>
     <!-- =================================
          HEADER / NAVIGATION
     ================================== -->
-
-    <header class="main-header">
-      <div class="header-left">
-        <a href="#" class="university-logo">
-          <i class="fa-solid fa-graduation-cap"></i>
-
-          <div>
-            <h2>Université de Cambridge</h2>
-            <span>California</span>
-          </div>
-        </a>
-      </div>
-
-      <nav class="main-navigation">
-        <ul class="top-navigation">
-          <li><a href="#">Info</a></li>
-          <li><a href="#">Visit</a></li>
-          <li><a href="#">Apply</a></li>
-          <li><a href="#">Give</a></li>
-        </ul>
-
-        <ul class="main-menu">
-          <li>
-            <a href="../filiere/filiere.php"> Filière </a>
-          </li>
-
-          <li>
-            <a href="../classe/classe.php"> Classe </a>
-          </li>
-
-          <li>
-            <a href="../note/note.php"> Note / Bulletin </a>
-          </li>
-
-          <li>
-            <a href="../etudiant/etudiant.php"> Étudiant </a>
-          </li>
-
-          <li>
-            <a href="../professeur/professeur.php"> Professeur </a>
-          </li>
-
-          <li>
-            <a href="../admin/administration.html" class="active">
-              Administration
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <?php require_once __DIR__ . "/../../components/header.php"?>
 
     <!-- =================================
          CONTENU PRINCIPAL
@@ -124,13 +72,14 @@
             <span class="step-number">01</span>
           </div>
 
-          <form class="addition-options">
+          <form class="addition-options" id="get-choice">
             <label class="addition-option" for="choice-filiere">
               <input
                 type="radio"
                 name="choice"
                 id="choice-filiere"
                 value="filiere"
+                <?= ($_GET['choice'] ?? '') === 'filiere' ? 'checked' : ''?>
               />
 
               <div class="option-content">
@@ -153,6 +102,7 @@
                 name="choice"
                 id="choice-classe"
                 value="classe"
+                <?= ($_GET['choice'] ?? '') === 'classe' ? 'checked' : ''?>
               />
 
               <div class="option-content">
@@ -175,6 +125,7 @@
                 name="choice"
                 id="choice-matiere"
                 value="matiere"
+                <?= ($_GET['choice'] ?? '') === 'matiere' ? 'checked' : ''?>
               />
 
               <div class="option-content">
@@ -197,7 +148,7 @@
                 name="choice"
                 id="choice-etudiant"
                 value="etudiant"
-                checked
+                <?= ($_GET['choice'] ?? 'etudiant') === 'etudiant' ? 'checked' : ''?>
               />
 
               <div class="option-content">
@@ -216,11 +167,19 @@
           </form>
         </div>
 
-        <!-- CREATION DE MATIERE -->
-        <section>
-          <h1>Ajouter des nouvelles filieres</h1>
-        </section>
+        <?php if($choice === 'etudiant'):?>
+          <?php require_once __DIR__ . "/../../components/administration/inscription.php"?>
+        <?php elseif($choice === 'matiere'):?>
+          <?php require_once __DIR__ . "/../../components/administration/matiere.php"?>
+        <?php elseif($choice === 'classe'):?>
+          <?php require_once __DIR__ . "/../../components/administration/classe.php"?>
+        <?php elseif($choice === 'filiere'):?>
+          <?php require_once __DIR__ . "/../../components/administration/filiere.php"?>
+        <?php endif?>
       </section>
     </main>
+
+    <!-- FOOTER -->
+    <?php require_once __DIR__ . "/../../components/footer.php"?>
   </body>
 </html>

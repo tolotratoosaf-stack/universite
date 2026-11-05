@@ -33,6 +33,9 @@
   --background-color: #f8f4f1;
   --surface-color: #ffffff;
 
+  /* read-only */
+  --read-only: #ebd4ac;
+
   /* Textes */
   --text-primary: #302a30;
   --text-secondary: #817780;

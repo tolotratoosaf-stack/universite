@@ -1,9 +1,22 @@
+<?php
+  require_once __DIR__ . "/../../../server/services/getData/etudiant.php";
+  require_once __DIR__ . "/../../../server/services/getData/filiere.php";
+  require_once __DIR__ . "/../../../server/services/getData/classe.php";
+
+  function initiales(string $prenom, string $nom): string {
+    $p = mb_substr(trim($prenom), 0, 1);
+    $n = mb_substr(trim($nom), 0, 1);
+    return mb_strtoupper($p . $n);
+  }
+?>
+
 <!doctype html>
 <html lang="fr">
   <head>
     <?php require_once __DIR__ . "/../../components/head.php"?>
     <title>Liste des étudiants</title>
     <link rel="stylesheet" href="etudiant.css" />
+    <script src="etudiant.js" defer></script>
   </head>
 
   <body>
@@ -45,7 +58,7 @@
 
               <div>
                 <span>Total étudiants</span>
-                <h2>158</h2>
+                <h2><?= $count_etudiant[0]['count_etudiant']?></h2>
                 <small>Effectif général</small>
               </div>
             </article>
@@ -57,7 +70,7 @@
 
               <div>
                 <span>Étudiants actifs</span>
-                <h2>142</h2>
+                <h2><?= $etudiant_actif[0]['etudiant_actif']?></h2>
                 <small>Inscrits cette année</small>
               </div>
             </article>
@@ -69,7 +82,7 @@
 
               <div>
                 <span>Nouveaux étudiants</span>
-                <h2>24</h2>
+                <h2><?= $nouveau_etudiant[0]['nouveau_etudiant']?></h2>
                 <small>Nouvelle inscription</small>
               </div>
             </article>
@@ -81,7 +94,7 @@
 
               <div>
                 <span>En attente</span>
-                <h2>16</h2>
+                <h2>0</h2>
                 <small>Dossiers à vérifier</small>
               </div>
             </article>
@@ -100,18 +113,19 @@
 
             <span class="result-count">
               <i class="fa-solid fa-users"></i>
-              158 étudiants
+              <?= count($etudiants)?> étudiants
             </span>
           </div>
 
           <!-- FILTRES -->
-          <div class="filter-container">
+          <form class="filter-container" method="GET">
             <div class="filter-search">
               <i class="fa-solid fa-magnifying-glass"></i>
 
               <input
                 type="search"
                 id="searchStudent"
+                name="search"
                 placeholder="Rechercher par nom, matricule..."
               />
             </div>
@@ -119,35 +133,61 @@
             <div class="filter-group">
               <label for="filterFiliere">Filière</label>
 
-              <select id="filterFiliere">
-                <option value="">Toutes les filières</option>
-                <option>Gestion</option>
-                <option>Informatique</option>
-                <option>Droit</option>
+              <select id="filterFiliere" name="filiere">
+                <option
+                  value=""
+                  <?= ($_GET["filiere"] ?? '') === '' ? 'selected' : ''?>
+                >Toutes les filières</option>
+                <?php foreach($all_filiere as $filiere):?>
+                  <option
+                    value="<?= $filiere['nom_filiere']?>"
+                    <?= $filiere['nom_filiere'] === ($_GET['filiere'] ?? '') ? 'selected' : ''?>
+                  >
+                    <?= $filiere['nom_filiere']?>
+                  </option>
+                <?php endforeach?>
               </select>
             </div>
 
             <div class="filter-group">
               <label for="filterClasse">Classe</label>
 
-              <select id="filterClasse">
-                <option value="">Toutes les classes</option>
-                <option>Licence 1</option>
-                <option>Licence 2</option>
-                <option>Licence 3</option>
-                <option>Master 1</option>
-                <option>Master 2</option>
+              <select id="filterClasse" name="classe">
+                <option
+                  value=""
+                  <?= ($_GET["classe"] ?? '') ==='' ? 'selected' : ''?>
+                >Toutes les classes</option>
+                <?php foreach($classe_distinct as $list_classe):?>
+                  <option
+                    value="<?= $list_classe['nom_classe']?>"
+                    <?= $list_classe['nom_classe'] === ($_GET['classe'] ?? '') ? 'selected' : ''?>
+                  >
+                    <?= $list_classe['nom_classe']?>
+                  </option>
+                <?php endforeach?>
               </select>
             </div>
 
             <div class="filter-group">
               <label for="filterStatut">Statut</label>
 
-              <select id="filterStatut">
-                <option value="">Tous les statuts</option>
-                <option>Actif</option>
-                <option>En attente</option>
-                <option>Suspendu</option>
+              <select id="filterStatut" name="statut">
+                <option
+                  value=""
+                  <?= ($_GET["statut"] ?? '') ==='' ? 'selected' : ''?>
+                >Tous les statuts</option>
+                <option
+                  value="actif"
+                  <?= ($_GET['statut'] ?? '') === 'actif' ? 'selected' : ''?>
+                >Actif</option>
+                <option
+                  value='attente'
+                  <?= ($_GET['statut'] ?? '') === 'attente' ? 'selected' : ''?>
+                >En attente</option>
+                <option
+                  value='suspendu'
+                  <?= ($_GET['statut'] ?? '') === 'suspendu' ? 'selected' : ''?>
+                >Suspendu</option>
               </select>
             </div>
 
@@ -155,7 +195,7 @@
               <i class="fa-solid fa-rotate-left"></i>
               Réinitialiser
             </button>
-          </div>
+          </form>
 
           <!-- TABLEAU DES ÉTUDIANTS -->
           <div class="table-container">
@@ -176,250 +216,61 @@
               </thead>
 
               <tbody>
-                <!-- ÉTUDIANT 1 -->
-                <tr>
-                  <td>
-                    <input
-                      type="checkbox"
-                      aria-label="Sélectionner Jean Rakoto"
-                    />
-                  </td>
+                <!-- ÉTUDIANTS -->
+                <?php foreach($etudiants as $etudiant):?>
+                  <tr>
+                    <td>
+                      <input
+                        type="checkbox"
+                        aria-label="Sélectionner <?= $etudiant['nom']?>"
+                      />
+                    </td>
 
-                  <td>
-                    <div class="student-identity">
-                      <div class="student-avatar avatar-one">JR</div>
-                      <div>
-                        <strong>Jean Rakoto</strong>
-                        <span>Masculin</span>
+                    <td>
+                      <div class="student-identity">
+                        <div class="student-avatar avatar-one">
+                          <?= htmlspecialchars(initiales($etudiant['prenom'], $etudiant['nom'])) ?>
+                        </div>
+                        <div>
+                          <strong><?= $etudiant['prenom']?> <?= $etudiant['nom']?></strong>
+                          <span><?= $etudiant['matricule']?></span>
+                        </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td>ETU-2026-001</td>
-                  <td>Gestion</td>
-                  <td>Licence 2</td>
+                    <td><?= $etudiant['matricule']?></td>
+                    <td><?= $etudiant['nom_filiere']?></td>
+                    <td><?= $etudiant['nom_classe']?></td>
 
-                  <td>
-                    <div class="contact-info">
-                      <span>jean@email.com</span>
-                      <small>+261 34 00 000 01</small>
-                    </div>
-                  </td>
-
-                  <td>
-                    <span class="status active">Actif</span>
-                  </td>
-
-                  <td>
-                    <div class="action-buttons">
-                      <button class="action-btn view" title="Voir le profil">
-                        <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="action-btn edit" title="Modifier">
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
-                      <button class="action-btn delete" title="Supprimer">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ÉTUDIANT 2 -->
-                <tr>
-                  <td>
-                    <input
-                      type="checkbox"
-                      aria-label="Sélectionner Marie Andria"
-                    />
-                  </td>
-
-                  <td>
-                    <div class="student-identity">
-                      <div class="student-avatar avatar-two">MA</div>
-                      <div>
-                        <strong>Marie Andria</strong>
-                        <span>Féminin</span>
+                    <td>
+                      <div class="contact-info">
+                        <span><?= $etudiant['email']?></span>
+                        <small><?= $etudiant['telephone']?></small>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td>ETU-2026-002</td>
-                  <td>Informatique</td>
-                  <td>Licence 1</td>
+                    <td>
+                      <?php $estActif = (int) $etudiant['actif'] === 1; ?>
+                      <span class="status <?= $estActif ? 'active' : ''?>">
+                        <?= $estActif ? 'actif' : 'suspendue'?>
+                      </span>
+                    </td>
 
-                  <td>
-                    <div class="contact-info">
-                      <span>marie@email.com</span>
-                      <small>+261 34 00 000 02</small>
-                    </div>
-                  </td>
-
-                  <td>
-                    <span class="status active">Actif</span>
-                  </td>
-
-                  <td>
-                    <div class="action-buttons">
-                      <button class="action-btn view" title="Voir le profil">
-                        <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="action-btn edit" title="Modifier">
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
-                      <button class="action-btn delete" title="Supprimer">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ÉTUDIANT 3 -->
-                <tr>
-                  <td>
-                    <input
-                      type="checkbox"
-                      aria-label="Sélectionner Paul Rabe"
-                    />
-                  </td>
-
-                  <td>
-                    <div class="student-identity">
-                      <div class="student-avatar avatar-three">PR</div>
-                      <div>
-                        <strong>Paul Rabe</strong>
-                        <span>Masculin</span>
+                    <td>
+                      <div class="action-buttons">
+                        <button class="action-btn view" title="Voir le profil">
+                          <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <button class="action-btn edit" title="Modifier">
+                          <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="action-btn delete" title="Supprimer">
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
                       </div>
-                    </div>
-                  </td>
-
-                  <td>ETU-2026-003</td>
-                  <td>Droit</td>
-                  <td>Licence 3</td>
-
-                  <td>
-                    <div class="contact-info">
-                      <span>paul@email.com</span>
-                      <small>+261 34 00 000 03</small>
-                    </div>
-                  </td>
-
-                  <td>
-                    <span class="status pending">En attente</span>
-                  </td>
-
-                  <td>
-                    <div class="action-buttons">
-                      <button class="action-btn view" title="Voir le profil">
-                        <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="action-btn edit" title="Modifier">
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
-                      <button class="action-btn delete" title="Supprimer">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ÉTUDIANT 4 -->
-                <tr>
-                  <td>
-                    <input
-                      type="checkbox"
-                      aria-label="Sélectionner Sarah Raso"
-                    />
-                  </td>
-
-                  <td>
-                    <div class="student-identity">
-                      <div class="student-avatar avatar-four">SR</div>
-                      <div>
-                        <strong>Sarah Raso</strong>
-                        <span>Féminin</span>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>ETU-2026-004</td>
-                  <td>Gestion</td>
-                  <td>Master 1</td>
-
-                  <td>
-                    <div class="contact-info">
-                      <span>sarah@email.com</span>
-                      <small>+261 34 00 000 04</small>
-                    </div>
-                  </td>
-
-                  <td>
-                    <span class="status active">Actif</span>
-                  </td>
-
-                  <td>
-                    <div class="action-buttons">
-                      <button class="action-btn view" title="Voir le profil">
-                        <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="action-btn edit" title="Modifier">
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
-                      <button class="action-btn delete" title="Supprimer">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ÉTUDIANT 5 -->
-                <tr>
-                  <td>
-                    <input
-                      type="checkbox"
-                      aria-label="Sélectionner David Rala"
-                    />
-                  </td>
-
-                  <td>
-                    <div class="student-identity">
-                      <div class="student-avatar avatar-five">DR</div>
-                      <div>
-                        <strong>David Rala</strong>
-                        <span>Masculin</span>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td>ETU-2026-005</td>
-                  <td>Informatique</td>
-                  <td>Master 2</td>
-
-                  <td>
-                    <div class="contact-info">
-                      <span>david@email.com</span>
-                      <small>+261 34 00 000 05</small>
-                    </div>
-                  </td>
-
-                  <td>
-                    <span class="status suspended">Suspendu</span>
-                  </td>
-
-                  <td>
-                    <div class="action-buttons">
-                      <button class="action-btn view" title="Voir le profil">
-                        <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="action-btn edit" title="Modifier">
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
-                      <button class="action-btn delete" title="Supprimer">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                <?php endforeach?>
               </tbody>
             </table>
           </div>
@@ -427,25 +278,8 @@
           <!-- PIED DU TABLEAU -->
           <div class="table-footer">
             <span>
-              Affichage de <strong>1 à 5</strong> sur
-              <strong>158 étudiants</strong>
+              <strong><?= count($etudiants)?> étudiants</strong>
             </span>
-
-            <div class="pagination">
-              <button disabled>
-                <i class="fa-solid fa-chevron-left"></i>
-              </button>
-
-              <button class="current">1</button>
-              <button>2</button>
-              <button>3</button>
-              <span>...</span>
-              <button>32</button>
-
-              <button>
-                <i class="fa-solid fa-chevron-right"></i>
-              </button>
-            </div>
           </div>
         </section>
       </div>

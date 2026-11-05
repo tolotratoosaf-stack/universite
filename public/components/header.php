@@ -15,7 +15,7 @@
         <li><a href="../note/note.php">Note/bulletin</a></li>
         <li><a href="../etudiant/etudiant.php">Etudiant</a></li>
         <li><a href="../professeur/professeur.php">Professeur</a></li>
-        <li><a href="../admin/administration.html">Administration</a></li>
+        <li><a href="../admin/administration.php?choice=etudiant">Administration</a></li>
     </ul>
     </nav>
 </header>

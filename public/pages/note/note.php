@@ -1,7 +1,7 @@
 <?php
-  $choice  = in_array($_GET['choice'] ?? '', ['note', 'bulletin']) ? $_GET['choice'] : 'note';
-  $filiere = in_array($_GET['filiere']?? '', ['gestion','informatique','droit']) ? $_GET['filiere'] : 'gestion';
-  $classe  = in_array($_GET['classe'] ?? '', ['l1', 'l2', 'l3', 'm1', 'm2']) ? $_GET['classe'] : 'l1';
+  $choice  = (string) in_array($_GET['choice'] ?? '', ['note', 'bulletin']) ? $_GET['choice'] : 'note';
+  $filiere = (string) in_array($_GET['filiere']?? '', ['gestion','informatique','droit']) ? $_GET['filiere'] : 'gestion';
+  $classe  = (string) in_array($_GET['classe'] ?? '', ['l1', 'l2', 'l3', 'm1', 'm2']) ? $_GET['classe'] : 'l1';
 ?>
 
 <!doctype html>
@@ -96,11 +96,11 @@
               
               <div class="select-wrapper">
                 <select name="classe" id="classe">
-                  <option value="l1" <?= $filiere === 'l1' ? 'selected' : ''?>>Licence 1</option>
-                  <option value="l2" <?= $filiere === 'l2' ? 'selected' : ''?>>Licence 2</option>
-                  <option value="l3" <?= $filiere === 'l3' ? 'selected' : ''?>>Licence 3</option>
-                  <option value="m1" <?= $filiere === 'm1' ? 'selected' : ''?>>Master 1</option>
-                  <option value="m2" <?= $filiere === 'm2' ? 'selected' : ''?>>Master 2</option>
+                  <option value="l1" <?= $classe === 'l1' ? 'selected' : ''?>>Licence 1</option>
+                  <option value="l2" <?= $classe === 'l2' ? 'selected' : ''?>>Licence 2</option>
+                  <option value="l3" <?= $classe === 'l3' ? 'selected' : ''?>>Licence 3</option>
+                  <option value="m1" <?= $classe === 'm1' ? 'selected' : ''?>>Master 1</option>
+                  <option value="m2" <?= $classe === 'm2' ? 'selected' : ''?>>Master 2</option>
                 </select>
                 
                 <i class="fa-solid fa-chevron-down"></i>

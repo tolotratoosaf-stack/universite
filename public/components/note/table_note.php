@@ -1,7 +1,18 @@
+<?php
+  require_once __DIR__ . "/../../../server/services/getData/note.php";
+  require_once __DIR__ . "/../../../server/services/getData/etudiant.php";
+
+  $filiere = $_GET['filiere'] ?? 'gestion';
+  $classe = $_GET['classe'] ?? 'l1';
+
+  // Les examens
+  $examen_name = (array) ['semestre-one','semestre-two','final-exam'];
+?>
+
 <section class="page-content">
   <div class="table-container">
     <div class="table-caption">
-      <span> Notes des étudiants de Gestion - Licence 1 </span>
+      <span> Notes des étudiants de <?= htmlspecialchars($filiere)?> - <?= htmlspecialchars($classe)?> </span>
 
       <span class="caption-info"> Saisie des notes </span>
     </div>
@@ -11,368 +22,86 @@
           <!-- PREMIÈRE LIGNE : GROUPES -->
           <tr>
             <th rowspan="2" class="fixed-column matricule">Matricule</th>
-
             <th rowspan="2" class="fixed-column student-name">Nom et Prénom</th>
-
-            <th colspan="10" class="semestre-one">Semestre 1</th>
-
-            <th colspan="10" class="semestre-two">Semestre 2</th>
-
-            <th colspan="10" class="final-exam">Examen final</th>
+            <th colspan="<?= count($all_matiere)?>" class="semestre-one">Semestre 1</th>
+            <th colspan="<?= count($all_matiere)?>" class="semestre-two">Semestre 2</th>
+            <th colspan="<?= count($all_matiere)?>" class="final-exam">Examen final</th>
             <th rowspan="2" class="action">Action</th>
           </tr>
 
           <!-- DEUXIÈME LIGNE : MATIÈRES -->
           <tr>
-            <!-- SEMESTRE 1 -->
-            <th class="semestre-one">Comptabilité générale</th>
-            <th class="semestre-one">Comptabilité de société</th>
-            <th class="semestre-one">Mathématique financière</th>
-            <th class="semestre-one">Mathématique générale</th>
-            <th class="semestre-one">Économie</th>
-            <th class="semestre-one">Statistique</th>
-            <th class="semestre-one">Droit social</th>
-            <th class="semestre-one">Droit commercial</th>
-            <th class="semestre-one">Droit fiscal</th>
-            <th class="semestre-one">Informatique</th>
-
-            <!-- SEMESTRE 2 -->
-            <th class="semestre-two">Comptabilité générale</th>
-            <th class="semestre-two">Comptabilité de société</th>
-            <th class="semestre-two">Mathématique financière</th>
-            <th class="semestre-two">Mathématique générale</th>
-            <th class="semestre-two">Économie</th>
-            <th class="semestre-two">Statistique</th>
-            <th class="semestre-two">Droit social</th>
-            <th class="semestre-two">Droit commercial</th>
-            <th class="semestre-two">Droit fiscal</th>
-            <th class="semestre-two">Informatique</th>
-
-            <!-- EXAMEN FINAL -->
-            <th class="final-exam">Comptabilité générale</th>
-            <th class="final-exam">Comptabilité de société</th>
-            <th class="final-exam">Mathématique financière</th>
-            <th class="final-exam">Mathématique générale</th>
-            <th class="final-exam">Économie</th>
-            <th class="final-exam">Statistique</th>
-            <th class="final-exam">Droit social</th>
-            <th class="final-exam">Droit commercial</th>
-            <th class="final-exam">Droit fiscal</th>
-            <th class="final-exam">Informatique</th>
+            <?php foreach($examen_name as $examen):?>
+              <?php foreach($all_matiere as $matiere):?>
+                <th class="<?= $examen?>"><?= $matiere['nom_matiere']?></th>
+              <?php endforeach?>
+            <?php endforeach?>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td class="fixed-column matricule">ETU-001</td>
-            <td class="fixed-column student-name">Jean Rakoto</td>
+          <?php foreach($all_etudiant_inscrit as $etudiant):?>
+            <tr>
+              <td class="fixed-column matricule"><?= $etudiant['matricule']?></td>
+              <td class="fixed-column student-name"><?= $etudiant['nom']?> <?= $etudiant['prenom']?></td>
 
-            <!-- NOTES SEMESTRE 1 -->
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="comptabilite_generale_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="comptabilite_societe_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="mathematique_financiere_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="mathematique_generale_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="economie_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="statistique_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="droit_social_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="droit_commercial_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="droit_fiscal_s1"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-                form="ETU-001"
-                name="informatique_s1"
-              />
-            </td>
-
-            <!-- NOTES SEMESTRE 2 -->
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-
-            <!-- EXAMEN FINAL -->
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
-                placeholder="—"
-              />
-            </td>
-
-            <!-- Validation -->
-            <td><button type="submit" form="ETU-001">Valider</button></td>
-          </tr>
+              <!-- NOTE PREMIER SEMESTRE -->
+              <?php foreach(['semestre1','semestre2','examen_final'] as $type):?>
+                <?php foreach($all_matiere as $matiere):?>
+                  <?php
+                    $valeur = $grilles[$etudiant['id']][$type][$matiere['id']] ?? '';
+                    $noteExiste = $valeur !== '';
+                  ?>
+                  <td>
+                    <input
+                      type="number"
+                      min="0"
+                      max="20"
+                      value="<?= $valeur?>"
+                      step="0.25"
+                      placeholder="—"
+                      form="form-<?= $etudiant['matricule']?>"
+                      name="note[<?= $type?>][<?= $matiere['id']?>]"
+                      <?= $noteExiste ? 'disabled' : ''?>
+                    >
+                  </td>
+                <?php endforeach?>
+              <?php endforeach?>
+              <td>
+                <button type="submit" form="form-<?= $etudiant['matricule']?>">Valider</button>
+              </td>
+            </tr>
+          <?php endforeach?>
         </tbody>
       </table>
 
-      <!-- VALIDATION DU FORMULAIRE -->
-      <form action="#" method="POST">
-        <input type="hidden" name="matricule" value="ETU-001" />
-      </form>
+      <?php foreach ($all_etudiant_inscrit as $etudiant): ?>
+        <form
+          action="../../../server/services/sendData/note.php"
+          method="POST"
+          id="form-<?= htmlspecialchars($etudiant['matricule']) ?>"
+        >
+          <input
+            type="hidden"
+            name="inscription_id"
+            value="<?= htmlspecialchars($etudiant['inscription_id']) ?>"
+          >
+        </form>
+      <?php endforeach; ?>
+
+      <!-- En cas d'absence de resultat -->
+      <div class="aucun" id="emptyState" hidden>
+        <h2>Aucun resultat correspondant pour "<?= htmlspecialchars($_GET["filiere"])?> <?= htmlspecialchars($_GET["classe"])?>"</h2>
+      </div>
+
     </div>
   </div>
+  <script defer>
+    const all_input = document.querySelectorAll("input[type=number]");
+    all_input.forEach((input) => (input.readOnly = input.value !== ""));
+
+    const emptyState = document.querySelector("#emptyState");
+    const ligne = document.querySelector("table tbody");
+    emptyState.hidden = ligne.querySelectorAll("tr").length > 0;
+  </script>
 </section>

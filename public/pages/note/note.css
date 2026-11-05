@@ -318,6 +318,16 @@ main {
   overflow: hidden;
 }
 
+.table-container .aucun {
+  margin-block: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.table-container .aucun h2 {
+  color: var(--warning-color);
+}
+
 /* CAPTION FIXE */
 .table-caption {
   position: sticky;
@@ -469,8 +479,59 @@ main {
   color: #b8afb4;
 }
 
+.notes-table input[type="number"]:read-only {
+  background-color: var(--read-only);
+  color: var(--secondary-color);
+  cursor: no-drop;
+}
+
+.notes-table input[type="number"]:read-only::-webkit-inner-spin-button,
+.notes-table input[type="number"]:read-only::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* Suppression des flèches sur certains navigateurs */
 .notes-table input[type="number"]::-webkit-inner-spin-button,
 .notes-table input[type="number"]::-webkit-outer-spin-button {
   opacity: 1;
+}
+
+/* =========================================
+   BOUTON VALIDER - TABLEAU DES NOTES
+========================================= */
+
+.notes-table td {
+  vertical-align: middle;
+}
+
+.notes-table td button[type="submit"] {
+  padding: 9px 17px;
+  min-width: 85px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(114, 47, 69, 0.15);
+}
+
+.notes-table td button[type="submit"]:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(57, 36, 63, 0.2);
+}
+
+.notes-table td button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.notes-table td button[type="submit"]:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 3px;
 }

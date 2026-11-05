@@ -1,0 +1,726 @@
+/* ============================================
+   FORMULAIRE D'AJOUT D'UNE MATIÈRE
+   ============================================ */
+
+.administration-page .add_matiere {
+  width: 100%;
+  max-width: 1100px;
+  margin: 35px auto;
+  padding: 35px;
+  background: var(--surface-color, #ffffff);
+  border: 1px solid var(--border-color, #e8dfe3);
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(57, 36, 63, 0.07);
+  animation: matiereFadeIn 0.7s ease both;
+}
+
+@keyframes matiereFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   EN-TÊTE
+   ============================================ */
+
+.administration-page .matiere-heading {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--border-color, #e8dfe3);
+}
+
+.administration-page .matiere-heading-icon {
+  width: 65px;
+  height: 65px;
+  min-width: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 25px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #722f45, #39243f);
+  box-shadow: 0 8px 20px rgba(114, 47, 69, 0.22);
+}
+
+.administration-page .matiere-subtitle {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--accent-color, #b76e79);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.administration-page .matiere-heading h2 {
+  margin: 0 0 8px;
+  padding: 0;
+  color: var(--secondary-color, #39243f);
+  font-size: 25px;
+  font-weight: 750;
+}
+
+.administration-page .matiere-heading p {
+  margin: 0;
+  color: var(--text-secondary, #817780);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ============================================
+   FORMULAIRE ET SECTIONS
+   ============================================ */
+
+.administration-page .matiere-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.administration-page .matiere-section {
+  min-width: 0;
+  padding: 25px;
+  border: 1px solid var(--border-color, #e8dfe3);
+  border-radius: 16px;
+  background: #fffdfd;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.administration-page .matiere-section:hover {
+  border-color: rgba(183, 110, 121, 0.5);
+  box-shadow: 0 8px 22px rgba(57, 36, 63, 0.04);
+}
+
+.administration-page .matiere-section legend {
+  padding: 0 12px;
+  color: var(--secondary-color, #39243f);
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.administration-page .matiere-section legend i {
+  margin-right: 8px;
+  color: var(--primary-color, #722f45);
+}
+
+.administration-page .fieldset-description {
+  margin: 0 0 22px;
+  color: var(--text-secondary, #817780);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   AFFECTATION CLASSE - PROFESSEUR - CRÉDITS
+========================================= */
+
+.administration-page .classe-credit-item {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.administration-page .classe-credit-item:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 5px 15px rgba(114, 47, 69, 0.07);
+  transform: translateY(-2px);
+}
+
+/* Sélection de la classe */
+.administration-page .classe-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 75px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.administration-page .classe-choice input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.administration-page .classe-name {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Champs professeur et crédits */
+.administration-page .prof-input,
+.administration-page .credit-input {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.administration-page .prof-input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.administration-page .credit-input {
+  width: 110px;
+  flex-shrink: 0;
+}
+
+/* Labels */
+.administration-page .prof-input label,
+.administration-page .credit-input label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Select et input */
+.administration-page .prof-input select,
+.administration-page .credit-input input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  color: var(--text-primary);
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  transition: all 0.25s ease;
+}
+
+.administration-page .prof-input select {
+  cursor: pointer;
+}
+
+.administration-page .prof-input select:focus,
+.administration-page .credit-input input:focus {
+  background: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(114, 47, 69, 0.1);
+}
+
+/* Placeholder */
+.administration-page .credit-input input::placeholder {
+  color: #aaa0a7;
+}
+
+/* Suppression des flèches du champ number */
+.administration-page .credit-input input::-webkit-inner-spin-button,
+.administration-page .credit-input input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+/* Responsive */
+@media (max-width: 650px) {
+  .administration-page .classe-credit-item {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .administration-page .classe-choice {
+    width: 100%;
+  }
+
+  .administration-page .prof-input {
+    flex: 1 1 65%;
+    min-width: 160px;
+  }
+
+  .administration-page .credit-input {
+    flex: 1 1 80px;
+  }
+}
+
+@media (max-width: 400px) {
+  .administration-page .classe-credit-item {
+    padding: 14px;
+  }
+
+  .administration-page .prof-input,
+  .administration-page .credit-input {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
+/* ============================================
+   GRILLE DES INFORMATIONS
+   ============================================ */
+
+.administration-page .matiere-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.administration-page .matiere-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.administration-page .matiere-form .form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.administration-page .matiere-form .form-group > label {
+  color: var(--text-primary, #302a30);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.administration-page .obligatoire {
+  margin-left: 3px;
+  color: var(--danger-color, #d64550);
+}
+
+/* ============================================
+   CHAMPS INPUT
+   ============================================ */
+
+.administration-page .matiere-form .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.administration-page .matiere-form .input-wrapper > i {
+  position: absolute;
+  left: 15px;
+  color: var(--accent-color, #b76e79);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.administration-page .matiere-form .input-wrapper input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 15px 12px 43px;
+  border: 1px solid var(--border-color, #e8dfe3);
+  border-radius: 10px;
+  outline: none;
+  background: #ffffff;
+  color: var(--text-primary, #302a30);
+  font-family: inherit;
+  font-size: 13px;
+  transition: all 0.25s ease;
+}
+
+.administration-page .matiere-form input::placeholder,
+.administration-page .matiere-form textarea::placeholder {
+  color: #aaa0a7;
+}
+
+.administration-page .matiere-form .input-wrapper input:focus,
+.administration-page .matiere-form .textarea-wrapper textarea:focus {
+  border-color: var(--primary-color, #722f45);
+  box-shadow: 0 0 0 4px rgba(114, 47, 69, 0.09);
+}
+
+/* ============================================
+   DESCRIPTION
+   ============================================ */
+
+.administration-page .matiere-form .textarea-wrapper textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  resize: vertical;
+  border: 1px solid var(--border-color, #e8dfe3);
+  border-radius: 10px;
+  outline: none;
+  background: #ffffff;
+  color: var(--text-primary, #302a30);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.7;
+  transition: all 0.25s ease;
+}
+
+/* ============================================
+   BLOCS D'AFFECTATION DES FILIÈRES
+   ============================================ */
+
+.administration-page .filiere-affectation {
+  margin-top: 22px;
+  padding: 22px;
+  border: 1px solid var(--border-color, #e8dfe3);
+  border-radius: 15px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  animation: matiereFadeIn 0.5s ease both;
+}
+
+.administration-page .filiere-affectation:hover {
+  border-color: rgba(183, 110, 121, 0.6);
+  box-shadow: 0 8px 20px rgba(57, 36, 63, 0.05);
+}
+
+/* En-tête de chaque filière */
+
+.administration-page .affectation-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color, #e8dfe3);
+}
+
+.administration-page .affectation-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #722f45, #39243f);
+  font-size: 19px;
+}
+
+.administration-page .affectation-heading span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--accent-color, #b76e79);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.administration-page .affectation-heading h3 {
+  margin: 0;
+  color: var(--secondary-color, #39243f);
+  font-size: 17px;
+  font-weight: 750;
+}
+
+/* ============================================
+   TITRE DES CLASSES
+   ============================================ */
+
+.administration-page .classe-affectation {
+  padding-top: 20px;
+}
+
+.administration-page .classe-affectation-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.administration-page .classe-affectation-title h4 {
+  margin: 0;
+  color: var(--text-primary, #302a30);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.administration-page .classe-affectation-title span {
+  color: var(--text-secondary, #817780);
+  font-size: 11px;
+}
+
+/* ============================================
+   LISTE DES CLASSES ET CRÉDITS
+   ============================================ */
+
+.administration-page .classe-credit-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.administration-page .classe-credit-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--border-color, #e8dfe3);
+  border-radius: 11px;
+  background: #fffdfd;
+  transition: all 0.25s ease;
+}
+
+.administration-page .classe-credit-item:hover {
+  border-color: var(--accent-color, #b76e79);
+  background: #fff9fa;
+  transform: translateY(-2px);
+}
+
+/* Choix de la classe */
+
+.administration-page .classe-choice {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.administration-page .classe-choice input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--primary-color, #722f45);
+  cursor: pointer;
+}
+
+.administration-page .classe-name {
+  color: var(--text-primary, #302a30);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+/* Champ de crédit */
+
+.administration-page .credit-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.administration-page .credit-input label {
+  color: var(--text-secondary, #817780);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.administration-page .credit-input input {
+  width: 100%;
+  height: 36px;
+  padding: 7px 9px;
+  border: 1px solid var(--border-color, #e8dfe3);
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: var(--text-primary, #302a30);
+  font-family: inherit;
+  font-size: 12px;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.administration-page .credit-input input:focus {
+  border-color: var(--primary-color, #722f45);
+  box-shadow: 0 0 0 3px rgba(114, 47, 69, 0.08);
+}
+
+/* ============================================
+   NOTE D'INFORMATION
+   ============================================ */
+
+.administration-page .affectation-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(71, 133, 181, 0.2);
+  border-radius: 10px;
+  background: rgba(71, 133, 181, 0.06);
+  color: var(--text-secondary, #817780);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.administration-page .affectation-note i {
+  margin-top: 2px;
+  color: var(--info-color, #4785b5);
+}
+
+/* ============================================
+   ACTIONS DU FORMULAIRE
+   ============================================ */
+
+.administration-page .matiere-form .form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 8px;
+}
+
+.administration-page .matiere-form .form-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary, #817780);
+  font-size: 11px;
+}
+
+.administration-page .matiere-form .form-note i {
+  color: var(--accent-color, #b76e79);
+}
+
+.administration-page .matiere-form .button-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.administration-page .matiere-form .btn-reset,
+.administration-page .matiere-form .btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 45px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.administration-page .matiere-form .btn-reset {
+  color: var(--secondary-color, #39243f);
+  background: #f1ebee;
+}
+
+.administration-page .matiere-form .btn-reset:hover {
+  background: #e8dfe3;
+  transform: translateY(-2px);
+}
+
+.administration-page .matiere-form .btn-submit {
+  color: #ffffff;
+  background: linear-gradient(135deg, #722f45, #39243f);
+  box-shadow: 0 5px 15px rgba(114, 47, 69, 0.18);
+}
+
+.administration-page .matiere-form .btn-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 20px rgba(114, 47, 69, 0.25);
+}
+
+.administration-page .matiere-form button:active {
+  transform: scale(0.97);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media screen and (max-width: 850px) {
+  .administration-page .classe-credit-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .administration-page .add_matiere {
+    margin: 20px auto;
+    padding: 22px 16px;
+    border-radius: 16px;
+  }
+
+  .administration-page .matiere-heading {
+    align-items: flex-start;
+    gap: 13px;
+  }
+
+  .administration-page .matiere-heading-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 13px;
+    font-size: 20px;
+  }
+
+  .administration-page .matiere-heading h2 {
+    font-size: 20px;
+  }
+
+  .administration-page .matiere-heading p {
+    font-size: 12px;
+  }
+
+  .administration-page .matiere-section {
+    padding: 18px 13px;
+  }
+
+  .administration-page .matiere-form-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .administration-page .filiere-affectation {
+    padding: 15px;
+  }
+
+  .administration-page .classe-affectation-title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .administration-page .classe-credit-item {
+    padding: 12px;
+  }
+
+  .administration-page .matiere-form .form-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .administration-page .matiere-form .button-group {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+
+  .administration-page .matiere-form .btn-reset,
+  .administration-page .matiere-form .btn-submit {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITÉ : RÉDUCTION DES ANIMATIONS
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .administration-page .add_matiere,
+  .administration-page .filiere-affectation {
+    animation: none;
+  }
+
+  .administration-page .filiere-affectation,
+  .administration-page .classe-credit-item,
+  .administration-page .matiere-form button {
+    transition: none;
+  }
+}
