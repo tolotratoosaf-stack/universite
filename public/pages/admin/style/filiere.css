@@ -129,6 +129,111 @@
 }
 
 /* ==========================================
+   LISTE DES CLASSES (cases à cocher)
+========================================== */
+
+.administration-page .classe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.administration-page .classe-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.administration-page .classe-option:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+  background: #faf5f6;
+}
+
+.administration-page .classe-name {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 650;
+  transition: color 0.25s ease;
+}
+
+/* Case à cocher personnalisée */
+.administration-page .classe-option input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  display: grid;
+  place-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.administration-page .classe-option input[type="checkbox"]::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+
+.administration-page .classe-option input[type="checkbox"]:checked {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+}
+
+.administration-page .classe-option input[type="checkbox"]:checked::after {
+  transform: scale(1);
+}
+
+.administration-page .classe-option input[type="checkbox"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(114, 47, 69, 0.15);
+}
+
+/* État "coché" sur toute la carte */
+.administration-page .classe-option:has(input:checked) {
+  border-color: var(--primary-color);
+  background: rgba(114, 47, 69, 0.06);
+  box-shadow: 0 4px 12px rgba(114, 47, 69, 0.1);
+}
+
+.administration-page .classe-option:has(input:checked) .classe-name {
+  color: var(--primary-color);
+}
+
+/* Responsive */
+@media screen and (max-width: 550px) {
+  .administration-page .classe-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ==========================================
    GRILLE DES CHAMPS
    ========================================== */
 

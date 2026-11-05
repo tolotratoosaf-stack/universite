@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="style/filiere.css" />
     <link rel="stylesheet" href="style/matiere.css" />
     <script src="administration.js" defer></script>
+    <script src="app/inscription.js" defer></script>
+    <script src="app/filiere.js" defer></script>
+    <script src="app/matiere.js" defer></script>
   </head>
 
   <body>

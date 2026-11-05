@@ -82,7 +82,7 @@
                   Formation universitaire
                 </span>
 
-                <a href="#">
+                <a href="../classe/classe.php?filiere=<?= htmlspecialchars($filiere["nom_filiere"])?>">
                   Voir les détails
                   <i class="fa-solid fa-arrow-down-long"></i>
                 </a>

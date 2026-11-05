@@ -135,7 +135,7 @@
                   ><i class="fa-solid fa-book-open"></i> Formation
                   universitaire</span
                 >
-                <a href="#"
+                <a href="../etudiant/etudiant.php?filiere=<?= htmlspecialchars($classe_list['nom_filiere'])?>&classe"
                   >Voir les étudiants <i class="fa-solid fa-arrow-right"></i
                 ></a>
               </div>

@@ -1,4 +1,6 @@
-<?php?>
+<?php
+  require_once __DIR__ . "/../../../server/services/getData/matiere.php";
+?>
 
 <!-- =================================
             CRÉATION D'UNE MATIÈRE
@@ -20,7 +22,11 @@
     </div>
   </div>
 
-  <form action="#" method="POST" class="matiere-form">
+  <form
+    action="../../../server/services/sendData/matiere.php"
+    method="POST"
+    class="matiere-form"
+    id="add_matiere">
     <!-- 1. INFORMATIONS DE LA MATIÈRE -->
     <fieldset class="matiere-section">
       <legend>
@@ -96,261 +102,79 @@
         nombre de crédits attribué à chaque classe.
       </p>
 
-      <!-- FILIÈRE 1 -->
-      <div class="filiere-affectation">
-        <div class="affectation-heading">
-          <div class="affectation-icon">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div>
 
-          <div>
-            <span>FILIÈRE N° 01</span>
-            <h3>Informatique</h3>
-          </div>
-        </div>
-
-        <div class="classe-affectation">
-          <div class="classe-affectation-title">
-            <h4>Classes concernées</h4>
-            <span>Sélectionnez les classes et leurs crédits</span>
-          </div>
-
-          <div class="classe-credit-list">
-            <!-- CLASSE L1 -->
-            <div class="classe-credit-item">
-              <!-- SÉLECTION DE LA CLASSE -->
-              <label class="classe-choice" for="classe-info-l1">
-                <input
-                  type="checkbox"
-                  name="affectations[0][classes][L1][active]"
-                  id="classe-info-l1"
-                  value="1"
-                />
-                <span class="classe-name">L1</span>
-              </label>
-
-              <!-- SÉLECTION DU PROFESSEUR -->
-              <div class="prof-input">
-                <label for="prof-info-l1">Professeur</label>
-                <select
-                  name="affectations[0][classes][L1][professeur]"
-                  id="prof-info-l1"
-                >
-                  <option value="" selected disabled>
-                    Choisir un professeur
-                  </option>
-                  <option value="prof001">Rakoto Jean</option>
-                  <option value="prof002">Rabe Marie</option>
-                  <option value="prof003">Randria Paul</option>
-                </select>
-              </div>
-
-              <!-- NOMBRE DE CRÉDITS -->
-              <div class="credit-input">
-                <label for="credit-info-l1">Crédits</label>
-                <input
-                  type="number"
-                  id="credit-info-l1"
-                  name="affectations[0][classes][L1][credit]"
-                  min="1"
-                  step="1"
-                  placeholder="Ex : 6"
-                />
-              </div>
+      <?php foreach($all_filiere as $key => $filiere):?>
+        <!-- FILIÈRE 1 -->
+        <div class="filiere-affectation">
+          <div class="affectation-heading">
+            <div class="affectation-icon">
+              <i class="fa-solid fa-graduation-cap"></i>
             </div>
 
-            <!-- CLASSE L1 -->
-            <div class="classe-credit-item">
-              <!-- SÉLECTION DE LA CLASSE -->
-              <label class="classe-choice" for="classe-info-l2">
-                <input
-                  type="checkbox"
-                  name="affectations[0][classes][L2][active]"
-                  id="classe-info-l2"
-                  value="1"
-                />
-                <span class="classe-name">L2</span>
-              </label>
+            <div>
+              <span>FILIÈRE N° 0<?= $key + 1?></span>
+              <h3><?= $filiere['nom_filiere']?></h3>
+            </div>
+          </div>
 
-              <!-- SÉLECTION DU PROFESSEUR -->
-              <div class="prof-input">
-                <label for="prof-info-l2">Professeur</label>
-                <select
-                  name="affectations[0][classes][L2][professeur]"
-                  id="prof-info-l2"
-                >
-                  <option value="" selected disabled>
-                    Choisir un professeur
-                  </option>
-                  <option value="prof001">Rakoto Jean</option>
-                  <option value="prof002">Rabe Marie</option>
-                  <option value="prof003">Randria Paul</option>
-                </select>
-              </div>
-
-              <!-- NOMBRE DE CRÉDITS -->
-              <div class="credit-input">
-                <label for="credit-info-l1">Crédits</label>
-                <input
-                  type="number"
-                  id="credit-info-l1"
-                  name="affectations[0][classes][L2][credit]"
-                  min="1"
-                  step="1"
-                  placeholder="Ex : 6"
-                />
-              </div>
+          <div class="classe-affectation">
+            <div class="classe-affectation-title">
+              <h4>Classes concernées</h4>
+              <span>Sélectionnez les classes et leurs crédits</span>
             </div>
 
-            <!-- CLASSE L3 -->
-            <div class="classe-credit-item">
-              <label class="classe-choice">
-                <input
-                  type="checkbox"
-                  name="affectations[0][classes][L3][active]"
-                  value="1"
-                />
+            <div class="classe-credit-list">
+              <!-- CLASSE L1 -->
+              <?php foreach($classe_filiere as $cf):?>
+                <?php if($cf['nom_filiere'] !== $filiere['nom_filiere']){continue;}?>
+                <div class="classe-credit-item">
+                  <!-- SÉLECTION DE LA CLASSE -->
+                  <label class="classe-choice" for="classe-<?= $cf['code_filiere']?>-<?= $cf['code_classe']?>">
+                    <input
+                      type="checkbox"
+                      name="affectations[<?= $filiere['code_filiere'] ?>][classes][<?= $cf['code_classe']?>][active]"
+                      id="classe-<?= $cf['code_filiere']?>-<?= $cf['code_classe']?>"
+                      value="<?= $cf['id']?>"
+                    />
+                    <span class="classe-name"><?= $cf['code_classe']?></span>
+                  </label>
 
-                <span class="classe-name">L3</span>
-              </label>
+                  <!-- SÉLECTION DU PROFESSEUR -->
+                  <div class="prof-input">
+                    <label for="prof-<?= $cf['code_filiere']?>-<?= $cf['code_classe']?>">Professeur</label>
+                    <select
+                      name="affectations[<?= $cf['code_filiere']?>][classes][<?= $cf['code_classe']?>][professeur]"
+                      id="prof-<?= $cf['code_filiere']?>-<?= $cf['code_classe']?>"
+                    >
+                      <option value="" selected disabled>
+                        Choisir un professeur
+                      </option>
+                      <?php foreach($professeur as $p):?>
+                        <option value="<?= htmlspecialchars($p['id'])?>">
+                          <?= $p['nom']?> <?= $p['prenom']?>
+                        </option>
+                      <?php endforeach?>
+                    </select>
+                  </div>
 
-              <!-- SÉLECTION DU PROFESSEUR -->
-              <div class="prof-input">
-                <label for="prof-info-l3">Professeur</label>
-                <select
-                  name="affectations[0][classes][L3][professeur]"
-                  id="prof-info-l3"
-                >
-                  <option value="" selected disabled>
-                    Choisir un professeur
-                  </option>
-                  <option value="prof001">Rakoto Jean</option>
-                  <option value="prof002">Rabe Marie</option>
-                  <option value="prof003">Randria Paul</option>
-                </select>
-              </div>
-
-              <div class="credit-input">
-                <label for="credit-info-l3">Crédits</label>
-                <input
-                  type="number"
-                  id="credit-info-l3"
-                  name="affectations[0][classes][L3][credit]"
-                  min="1"
-                  step="1"
-                  placeholder="Ex : 4"
-                />
-              </div>
+                  <!-- NOMBRE DE CRÉDITS -->
+                  <div class="credit-input">
+                    <label for="credit-<?= $cf['code_filiere']?>-<?= $cf['code_classe']?>">Crédits</label>
+                    <input
+                      type="number"
+                      id="credit-<?= $cf['code_filiere']?>-<?= $cf['code_classe']?>"
+                      name="affectations[<?= $filiere['code_filiere'] ?>][classes][<?= $cf['code_classe']?>][credit]"
+                      min="1"
+                      step="1"
+                      placeholder="Ex : 6"
+                    />
+                  </div>
+                </div>
+              <?php endforeach?>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- FILIÈRE 2 -->
-      <div class="filiere-affectation">
-        <div class="affectation-heading">
-          <div class="affectation-icon">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div>
-
-          <div>
-            <span>FILIÈRE N° 02</span>
-            <h3>Gestion</h3>
-          </div>
-        </div>
-
-        <div class="classe-affectation">
-          <div class="classe-affectation-title">
-            <h4>Classes concernées</h4>
-            <span>Sélectionnez les classes et leurs crédits</span>
-          </div>
-
-          <div class="classe-credit-list">
-            <!-- CLASSE L1 -->
-            <div class="classe-credit-item">
-              <label class="classe-choice">
-                <input
-                  type="checkbox"
-                  name="affectations[1][classes][L1][active]"
-                  value="1"
-                />
-
-                <span class="classe-name">L1</span>
-              </label>
-
-              <!-- SÉLECTION DU PROFESSEUR -->
-              <div class="prof-input">
-                <label for="prof-gestion-l1">Professeur</label>
-                <select
-                  name="affectations[1][classes][L1][professeur]"
-                  id="prof-gestion-l1"
-                >
-                  <option value="" selected disabled>
-                    Choisir un professeur
-                  </option>
-                  <option value="prof001">Rakoto Jean</option>
-                  <option value="prof002">Rabe Marie</option>
-                  <option value="prof003">Randria Paul</option>
-                </select>
-              </div>
-
-              <div class="credit-input">
-                <label for="credit-gestion-l1">Crédits</label>
-                <input
-                  type="number"
-                  id="credit-gestion-l1"
-                  name="affectations[1][classes][L1][credit]"
-                  min="1"
-                  step="1"
-                  placeholder="Ex : 4"
-                />
-              </div>
-            </div>
-
-            <!-- CLASSE L2 -->
-            <div class="classe-credit-item">
-              <label class="classe-choice">
-                <input
-                  type="checkbox"
-                  name="affectations[1][classes][L2][active]"
-                  value="1"
-                />
-
-                <span class="classe-name">L2</span>
-              </label>
-
-              <!-- SÉLECTION DU PROFESSEUR -->
-              <div class="prof-input">
-                <label for="prof-gestion-l2">Professeur</label>
-                <select
-                  name="affectations[1][classes][L2][professeur]"
-                  id="prof-gestion-l2"
-                >
-                  <option value="" selected disabled>
-                    Choisir un professeur
-                  </option>
-                  <option value="prof001">Rakoto Jean</option>
-                  <option value="prof002">Rabe Marie</option>
-                  <option value="prof003">Randria Paul</option>
-                </select>
-              </div>
-
-              <div class="credit-input">
-                <label for="credit-gestion-l2">Crédits</label>
-                <input
-                  type="number"
-                  id="credit-gestion-l2"
-                  name="affectations[1][classes][L2][credit]"
-                  min="1"
-                  step="1"
-                  placeholder="Ex : 3"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <?php endforeach?>
       <p class="affectation-note">
         <i class="fa-solid fa-circle-info"></i>
         Une matière peut être affectée à plusieurs filières et classes.

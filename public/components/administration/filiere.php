@@ -1,3 +1,8 @@
+<?php
+  require_once __DIR__ . "/../../../server/services/getData/matiere.php";
+  require_once __DIR__ . "/../../../server/services/getData/classe.php";
+?>
+
 <!-- ==========================================
             FORMULAIRE : AJOUTER UNE FILIÈRE
         =========================================== -->
@@ -24,9 +29,8 @@
 
   <!-- FORMULAIRE -->
 
-  <form action="#" method="POST" class="filiere-form">
+  <form action="../../../server/services/sendData/filiere.php" method="POST" class="filiere-form">
     <!-- INFORMATIONS GÉNÉRALES -->
-
     <fieldset class="filiere-section">
       <legend>
         <i class="fa-solid fa-graduation-cap"></i>
@@ -34,17 +38,14 @@
       </legend>
 
       <div class="filiere-form-grid">
-        <!-- NOM -->
-
+        <!-- NOM FILIERE -->
         <div class="form-group">
           <label for="nom_filiere">
             Nom de la filière
             <span class="obligatoire">*</span>
           </label>
-
           <div class="input-wrapper">
             <i class="fa-solid fa-book"></i>
-
             <input
               type="text"
               name="nom_filiere"
@@ -56,17 +57,14 @@
           </div>
         </div>
 
-        <!-- CODE -->
-
+        <!-- CODE FILIERE -->
         <div class="form-group">
           <label for="code_filiere">
             Code de la filière
             <span class="obligatoire">*</span>
           </label>
-
           <div class="input-wrapper">
             <i class="fa-solid fa-hashtag"></i>
-
             <input
               type="text"
               name="code_filiere"
@@ -76,20 +74,17 @@
               required
             />
           </div>
-
           <small class="field-hint">
             Utilisez un code court et facilement identifiable.
           </small>
         </div>
 
-        <!-- DESCRIPTION -->
-
+        <!-- DESCRIPTION FILIERE -->
         <div class="form-group full-width">
           <label for="description_filiere">
             Description de la filière
             <span class="obligatoire">*</span>
           </label>
-
           <div class="textarea-wrapper">
             <textarea
               name="description_filiere"
@@ -100,7 +95,6 @@
               required
             ></textarea>
           </div>
-
           <small class="field-hint">
             Décrivez brièvement cette filière et ses objectifs pédagogiques.
           </small>
@@ -108,14 +102,38 @@
       </div>
     </fieldset>
 
-    <!-- MATIÈRES DE LA FILIÈRE -->
-
+    <!-- CLASSE DE LA FILIERE -->
     <fieldset class="filiere-section">
+      <legend>
+        <i class="fa-solid fa-users"></i>
+        Classes de la filière
+      </legend>
+      <div class="fieldset-description">
+        Sélectionnez les classes enseignées dans cette filière.
+      </div>
+
+      <!-- Contenue -->
+      <div class="classe-list">
+        <?php foreach($classe_distinct as $classe):?>
+          <label class="classe-option" for="<?= $classe['code_classe']?>">
+            <span class="classe-name"><?= $classe['nom_classe']?></span>
+            <input
+              type="checkbox"
+              name="classes[]"
+              value="<?= $classe['code_classe']?>"
+              id="<?= $classe['code_classe']?>"
+            />
+          </label>
+        <?php endforeach?>
+      </div>
+    </fieldset>
+
+    <!-- MATIÈRES DE LA FILIÈRE -->
+    <fieldset class="filiere-section" id="matiere">
       <legend>
         <i class="fa-solid fa-book-bookmark"></i>
         Matières de la filière
       </legend>
-
       <div class="fieldset-description">
         Sélectionnez les matières enseignées dans cette filière et indiquez
         leurs crédits.
@@ -124,109 +142,39 @@
       <div class="matiere-list">
         <!-- MATIÈRE : MATHÉMATIQUES -->
 
-        <div class="matiere-item">
-          <div class="matiere-selection">
-            <input type="checkbox" name="matieres[]" id="math" value="math" />
-
-            <label for="math">
-              <span class="matiere-icon">
-                <i class="fa-solid fa-calculator"></i>
-              </span>
-
-              <span class="matiere-info">
-                <strong>Mathématiques</strong>
-                <small>Mathématiques générales</small>
-              </span>
-            </label>
+        <?php foreach($all_matiere as $matiere):?>
+          <div class="matiere-item">
+            <div class="matiere-selection">
+              <input
+                type="checkbox"
+                name="matieres[]"
+                id="<?= $matiere['code_matiere']?>"
+                value="<?= $matiere['code_matiere']?>"
+              />
+              <label for="<?= $matiere['code_matiere']?>">
+                <span class="matiere-icon">
+                  <i class="fa-solid fa-calculator"></i>
+                </span>
+                <span class="matiere-info">
+                  <strong><?= $matiere['nom_matiere']?></strong>
+                  <small><?= $matiere['description_matiere']?></small>
+                </span>
+              </label>
+            </div>
+            <!-- CREDIT -->
+            <div class="credit-group">
+              <label for="credit_<?= $matiere['code_matiere']?>"> Crédit </label>
+              <input
+                type="number"
+                name="credits[<?= $matiere['code_matiere']?>]"
+                id="credit_<?= $matiere['code_matiere']?>"
+                min="1"
+                step="1"
+                placeholder="Ex : 4"
+              />
+            </div>
           </div>
-
-          <div class="credit-group">
-            <label for="credit_math"> Crédit </label>
-
-            <input
-              type="number"
-              name="credits[math]"
-              id="credit_math"
-              min="1"
-              step="1"
-              placeholder="Ex : 4"
-            />
-          </div>
-        </div>
-
-        <!-- MATIÈRE : COMPTABILITÉ -->
-
-        <div class="matiere-item">
-          <div class="matiere-selection">
-            <input
-              type="checkbox"
-              name="matieres[]"
-              id="compta"
-              value="compta"
-            />
-
-            <label for="compta">
-              <span class="matiere-icon">
-                <i class="fa-solid fa-calculator"></i>
-              </span>
-
-              <span class="matiere-info">
-                <strong>Comptabilité</strong>
-                <small>Comptabilité générale</small>
-              </span>
-            </label>
-          </div>
-
-          <div class="credit-group">
-            <label for="credit_compta"> Crédit </label>
-
-            <input
-              type="number"
-              name="credits[compta]"
-              id="credit_compta"
-              min="1"
-              step="1"
-              placeholder="Ex : 4"
-            />
-          </div>
-        </div>
-
-        <!-- MATIÈRE : INFORMATIQUE -->
-
-        <div class="matiere-item">
-          <div class="matiere-selection">
-            <input
-              type="checkbox"
-              name="matieres[]"
-              id="informatique"
-              value="informatique"
-            />
-
-            <label for="informatique">
-              <span class="matiere-icon">
-                <i class="fa-solid fa-laptop-code"></i>
-              </span>
-
-              <span class="matiere-info">
-                <strong>Informatique</strong>
-                <small>Informatique générale</small>
-              </span>
-            </label>
-          </div>
-
-          <div class="credit-group">
-            <label for="credit_informatique"> Crédit </label>
-
-            <input
-              type="number"
-              name="credits[informatique]"
-              id="credit_informatique"
-              min="1"
-              step="1"
-              placeholder="Ex : 5"
-            />
-          </div>
-        </div>
+        <?php endforeach?>
       </div>
     </fieldset>
 

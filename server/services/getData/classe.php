@@ -31,7 +31,7 @@
     $classe = getData($sql,$params);
 
     // RECUPERATION DE TOUTES LA CLASSE SANS DOUBLANT
-    $sql_distinc = (string) "SELECT DISTINCT(nom_classe), code_classe FROM classe";
+    $sql_distinc = (string) "SELECT DISTINCT(nom_classe), code_classe, id FROM classe";
     $classe_distinct = getData($sql_distinc,[]);
 
     $sql_all_filiere = "SELECT DISTINCT(nom_filiere), code_filiere FROM filiere ORDER BY nom_filiere ASC";
